@@ -178,23 +178,19 @@
       margin-bottom: 20px;
       flex: 1;
     }
-    .project-stats {
+    .project-tools {
       display: flex;
-      gap: 20px;
+      gap: 10px;
       margin-bottom: 20px;
       flex-wrap: wrap;
     }
-    .project-stat {
+    .project-tools span {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 6px 14px;
+      border-radius: 20px;
       font-size: 12px;
-      color: #666677;
-    }
-    .project-stat b {
-      color: #E8E8F0;
-      font-weight: 700;
-      display: block;
-      font-size: 18px;
-      letter-spacing: -0.3px;
-      margin-bottom: 2px;
+      color: #CCCCDD;
     }
     .project-links {
       display: flex;
@@ -289,6 +285,8 @@
       <span>SQL</span>
       <span>Python</span>
       <span>Figma</span>
+      <span>Codex</span>
+      <span>Claude</span>
       <span>GitHub Pages</span>
     </div>
   </section>
@@ -308,10 +306,12 @@
           <div class="project-tag">HR Analytics · People Ops</div>
           <h3>HR Employee Attrition — What Drives People to Leave</h3>
           <p>A 6-agent AI workflow turned 1,470 employee records into a verified Power BI case study: strategy, profiling, design, Deneb build, QA, and GitHub publishing.</p>
-          <div class="project-stats">
-            <div class="project-stat"><b>6</b>AI agents</div>
-            <div class="project-stat"><b>39.8%</b>Sales Rep attrition</div>
-            <div class="project-stat"><b>1,470</b>rows analyzed</div>
+          <div class="project-tools">
+            <span>6 AI agents</span>
+            <span>Power BI Desktop</span>
+            <span>Vega-Lite / Deneb</span>
+            <span>Claude Code</span>
+            <span>GitHub Pages</span>
           </div>
           <div class="project-links">
             <a class="project-link primary" href="hr-attrition-dashboard/">View case study →</a>
@@ -329,10 +329,12 @@
           <div class="project-tag">Labour Market · AI Roles</div>
           <h3>AI Jobs Market — Pay, Skills, and Where the Roles Are</h3>
           <p>A 3-agent AI workflow created the first dashboard case study: design, build, and QA agents turned labour-market data into a verified Power BI portfolio page.</p>
-          <div class="project-stats">
-            <div class="project-stat"><b>3</b>AI agents</div>
-            <div class="project-stat"><b>75%</b>Time reduction</div>
-            <div class="project-stat"><b>100%</b>Data verified</div>
+          <div class="project-tools">
+            <span>3 AI agents</span>
+            <span>Power BI</span>
+            <span>Figma</span>
+            <span>Google Stitch</span>
+            <span>Claude</span>
           </div>
           <div class="project-links">
             <a class="project-link primary" href="ai-jobs-dashboard/">View case study →</a>
