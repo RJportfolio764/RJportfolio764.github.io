@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR Employee Attrition — What Drives People to Leave — Rayyan Junaid</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+      background: #0A0A0F;
+      color: #E8E8F0;
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(20px);
+      z-index: 100;
+    }
+    .nav-logo { font-weight: 700; font-size: 18px; letter-spacing: -0.5px; }
+    .nav-logo span { color: #6C63FF; }
+    .nav-links a {
+      color: #AAAAAA;
+      text-decoration: none;
+      margin-left: 32px;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #E8E8F0; }
+
+    /* Hero */
+    .hero {
+      padding: 80px 60px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(108,99,255,0.15);
+      color: #6C63FF;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      border: 1px solid rgba(108,99,255,0.3);
+    }
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #AAAACC 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 18px;
+      color: #888899;
+      max-width: 760px;
+      margin-bottom: 36px;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .hero-meta span {
+      font-size: 13px;
+      color: #666677;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-meta b {
+      color: #E8E8F0;
+      font-weight: 700;
+    }
+
+    /* Dashboard Preview */
+    .preview-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 60px 60px;
+    }
+    .dashboard-preview {
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+    }
+    .dashboard-preview img {
+      width: 100%;
+      display: block;
+    }
+    .proof-strip {
+      max-width: 1200px;
+      margin: -32px auto 60px;
+      padding: 0 60px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .proof-item {
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 16px 18px;
+    }
+    .proof-item b {
+      color: #FFFFFF;
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .proof-item span {
+      color: #888899;
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+    .ai-workflow-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 60px 60px;
+    }
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+    .workflow-feature {
+      background: linear-gradient(180deg, rgba(108,99,255,0.11), rgba(255,255,255,0.03));
+      border: 1px solid rgba(108,99,255,0.25);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+    }
+    .workflow-feature h2,
+    .workflow-card h3 {
+      color: #FFFFFF;
+      letter-spacing: -0.3px;
+    }
+    .workflow-feature h2 {
+      font-size: 28px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .workflow-feature p,
+    .workflow-card p {
+      color: #AAAACC;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .workflow-card-stack {
+      display: grid;
+      gap: 14px;
+    }
+    .workflow-card {
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .workflow-card h3 {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+    .workflow-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .workflow-tags span {
+      color: #E8E8F0;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 12px;
+    }
+
+    /* KPI Strip */
+    .kpi-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .kpi-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .kpi-value {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #FFFFFF;
+    }
+    .kpi-value.accent { color: #6C63FF; }
+    .kpi-label {
+      font-size: 12px;
+      color: #666677;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 6px;
+    }
+
+    /* Insights */
+    .insights-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 60px 80px;
+    }
+    .section-title {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .section-subtitle {
+      font-size: 15px;
+      color: #666677;
+      margin-bottom: 36px;
+    }
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .insight-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .insight-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #6C63FF, transparent);
+    }
+    .insight-number {
+      font-size: 11px;
+      color: #6C63FF;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .insight-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+    .insight-card p {
+      font-size: 14px;
+      color: #888899;
+      line-height: 1.7;
+    }
+
+    /* Process */
+    .process-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 60px 80px;
+    }
+    .process-steps {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 36px;
+    }
+    .process-step {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .process-step-num {
+      background: rgba(108,99,255,0.2);
+      color: #6C63FF;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Tools */
+    .tools-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 60px 80px;
+    }
+    .tools-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 36px;
+    }
+    .tool-tag {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      color: #CCCCDD;
+    }
+
+    /* Interactive dashboard CTA */
+    .cta-section {
+      max-width: 1200px;
+      margin: -20px auto 60px;
+      padding: 0 60px;
+      text-align: center;
+    }
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #6C63FF 0%, #8B5CF6 100%);
+      color: #FFFFFF;
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      box-shadow: 0 10px 30px rgba(108,99,255,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-button:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(108,99,255,0.5); }
+    .cta-sub { font-size: 12px; color: #666677; margin-top: 10px; }
+
+    /* Executive pipeline flow */
+    .pipeline-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 60px 80px;
+    }
+    .pipeline-intro {
+      font-size: 14px;
+      color: #888899;
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 780px;
+    }
+    .agent-block {
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 6px;
+      border: 1px solid;
+      background: rgba(255,255,255,0.02);
+    }
+    .agent-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .agent-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .agent-title-row { font-size: 17px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px; letter-spacing: -0.2px; }
+    .agent-desc {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: #AAAACC;
+      margin-bottom: 12px;
+    }
+    .agent-io {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .io-cell {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #CCCCDD;
+    }
+    .io-label {
+      font-size: 9.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+      opacity: 0.8;
+    }
+    .agent-arrow {
+      text-align: center;
+      font-size: 22px;
+      color: rgba(255,255,255,0.15);
+      margin: 2px 0;
+    }
+    /* Agent color variants on dark */
+    .a1 { border-color: rgba(237,147,177,0.4); background: linear-gradient(180deg, rgba(237,147,177,0.06), rgba(237,147,177,0.02)); }
+    .a1 .agent-num { color: #ED93B1; }
+    .a1 .io-label { color: #ED93B1; }
+    .a2 { border-color: rgba(240,149,149,0.4); background: linear-gradient(180deg, rgba(240,149,149,0.06), rgba(240,149,149,0.02)); }
+    .a2 .agent-num { color: #F09595; }
+    .a2 .io-label { color: #F09595; }
+    .a3 { border-color: rgba(175,169,236,0.4); background: linear-gradient(180deg, rgba(175,169,236,0.06), rgba(175,169,236,0.02)); }
+    .a3 .agent-num { color: #AFA9EC; }
+    .a3 .io-label { color: #AFA9EC; }
+    .a4 { border-color: rgba(93,202,165,0.4); background: linear-gradient(180deg, rgba(93,202,165,0.06), rgba(93,202,165,0.02)); }
+    .a4 .agent-num { color: #5DCAA5; }
+    .a4 .io-label { color: #5DCAA5; }
+    .a5 { border-color: rgba(133,183,235,0.4); background: linear-gradient(180deg, rgba(133,183,235,0.06), rgba(133,183,235,0.02)); }
+    .a5 .agent-num { color: #85B7EB; }
+    .a5 .io-label { color: #85B7EB; }
+    .a6 { border-color: rgba(151,196,89,0.4); background: linear-gradient(180deg, rgba(151,196,89,0.06), rgba(151,196,89,0.02)); }
+    .a6 .agent-num { color: #97C459; }
+    .a6 .io-label { color: #97C459; }
+    .manual-block {
+      border: 1px dashed rgba(250,199,117,0.4);
+      background: rgba(250,199,117,0.05);
+      border-radius: 14px;
+      padding: 20px 26px;
+      margin-bottom: 6px;
+    }
+    .manual-block .agent-num { color: #FAC775; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .manual-block .agent-title-row { color: #FAC775; }
+    .manual-block .agent-desc { color: #CCB88E; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 40px 60px;
+      text-align: center;
+      font-size: 13px;
+      color: #555566;
+    }
+    footer a { color: #6C63FF; text-decoration: none; }
+
+    @media (max-width: 760px) {
+      nav { padding: 16px 22px; align-items: flex-start; gap: 14px; }
+      .nav-links { display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+      .nav-links a { margin-left: 0; }
+      .hero, .preview-section, .cta-section, .kpi-section, .insights-section, .process-section, .pipeline-section, .tools-section, .ai-workflow-section {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+      .hero { padding-top: 56px; }
+      .hero h1 { font-size: 36px; letter-spacing: -0.8px; }
+      .hero p { font-size: 16px; }
+      .hero-meta { gap: 10px; }
+      .proof-strip { grid-template-columns: 1fr; padding: 0 22px; margin-top: -36px; }
+      .workflow-grid { grid-template-columns: 1fr; }
+      .agent-io { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">Rayyan <span>Junaid</span></div>
+    <div class="nav-links">
+      <a href="https://rjportfolio764.github.io/">Portfolio</a>
+      <a href="https://linkedin.com/in/rayyanjunaid" target="_blank">LinkedIn</a>
+      <a href="https://github.com/RJportfolio764/hr-attrition-dashboard" target="_blank">GitHub</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-tag">AI Agent Workflow · HR Analytics</div>
+    <h1>HR Employee Attrition — What Drives People to Leave</h1>
+    <p>I used a 6-agent AI workflow to move from raw HR data to a verified Power BI dashboard: one agent planned the business question, one profiled the data, one designed the story, one built the visuals, one QA-checked the numbers, and one packaged the project for GitHub.</p>
+    <div class="hero-meta">
+      <span><b>AI workflow</b> 6 specialized agents</span>
+      <span><b>Dataset</b> 1,470 rows · 35 columns</span>
+      <span><b>Published</b> April 2026</span>
+    </div>
+  </section>
+
+  <section class="preview-section">
+    <div class="dashboard-preview">
+      <img src="screenshots/dashboard-final.png" alt="HR Employee Attrition — What Drives People to Leave Dashboard" />
+    </div>
+  </section>
+
+  <section class="proof-strip" aria-label="Project proof points">
+    <div class="proof-item">
+      <b>Human direction</b>
+      <span>I set the project goal, reviewed outputs, completed the Power BI finish, and chose what belonged in the portfolio.</span>
+    </div>
+    <div class="proof-item">
+      <b>AI agent handoffs</b>
+      <span>Each agent wrote files the next agent used, creating a repeatable strategy-to-publish pipeline.</span>
+    </div>
+    <div class="proof-item">
+      <b>Verified result</b>
+      <span>The final dashboard was QA-checked against the raw CSV before being turned into a GitHub case study.</span>
+    </div>
+  </section>
+
+  <section class="ai-workflow-section">
+    <div class="workflow-grid">
+      <div class="workflow-feature">
+        <h2>How I used AI to build the project</h2>
+        <p>This project is not just a dashboard screenshot. It is a documented AI-assisted production workflow: prompts, templates, data checks, design specs, chart JSON, Power BI assembly notes, QA reports, and publishing files all live in the project folder.</p>
+        <div class="workflow-tags">
+          <span>Claude Code</span>
+          <span>AI agents</span>
+          <span>Power BI</span>
+          <span>Deneb / Vega-Lite</span>
+          <span>GitHub Pages</span>
+        </div>
+      </div>
+      <div class="workflow-card-stack">
+        <div class="workflow-card">
+          <h3>Agent-led analysis</h3>
+          <p>The strategist and profiler agents selected the KPIs, checked data quality, flagged weak fields, and created the verified KPI source file.</p>
+        </div>
+        <div class="workflow-card">
+          <h3>Agent-led build</h3>
+          <p>The designer and builder agents converted the insight story into a bento layout, Deneb chart specs, DAX measures, and a Power BI project structure.</p>
+        </div>
+        <div class="workflow-card">
+          <h3>Agent-led publishing</h3>
+          <p>The QA and publisher agents recalculated the numbers, documented risks, generated this case study, and prepared the GitHub-ready portfolio bundle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <a class="cta-button" href="dashboard-interactive.html" target="_blank">
+      Open interactive dashboard
+      <span style="font-size:18px;">→</span>
+    </a>
+    <div class="cta-sub">Live Vega-Embed charts · 4 filters cross-apply across every visual · 1,470 rows in-browser</div>
+  </section>
+
+  <section class="kpi-section">
+    <div class="kpi-grid">
+      <!-- KPI 1 -->
+      <div class="kpi-card">
+        <div class="kpi-value accent">16.1%</div>
+        <div class="kpi-label">Overall Attrition Rate</div>
+      </div>
+      <!-- KPI 2 -->
+      <div class="kpi-card">
+        <div class="kpi-value">30.5%</div>
+        <div class="kpi-label">Overtime Attrition</div>
+      </div>
+      <!-- KPI 3 -->
+      <div class="kpi-card">
+        <div class="kpi-value">39.8%</div>
+        <div class="kpi-label">Max Role Attrition (Sales Rep)</div>
+      </div>
+      <!-- KPI 4 -->
+      <div class="kpi-card">
+        <div class="kpi-value">29.8%</div>
+        <div class="kpi-label">Early Tenure (0-2 yrs)</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="insights-section">
+    <div class="section-title">Key Insights</div>
+    <div class="section-subtitle">The retention story behind the dashboard.</div>
+    <div class="insights-grid">
+      <div class="insight-card">
+        <div class="insight-number">Insight 01</div>
+        <h3>Overtime is a 2.9× attrition multiplier</h3>
+        <p>30.5% of overtime employees leave, vs 10.4% of non-overtime — 416 employees currently sit in this high-risk bucket. The single strongest lever in the dataset.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-number">Insight 02</div>
+        <h3>Sales Representatives leave at 2.5× the company average</h3>
+        <p>39.8% annual attrition for Sales Reps vs 16.1% company-wide. The risk is concentrated enough to target with a role-specific retention program.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-number">Insight 03</div>
+        <h3>Attrition is front-loaded in years 0-2</h3>
+        <p>29.8% of employees in their first 2 years leave, vs just 8.1% of 10+ year veterans — a 3.7× gap. The leak is in year-one experience and onboarding, not long-tenure disengagement.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pipeline-section">
+    <div class="section-title">AI Agent Pipeline</div>
+    <div class="section-subtitle">The repeatable workflow behind the final dashboard.</div>
+    <p class="pipeline-intro">I treated AI as a project team, not a single chat. Each agent had a narrow job, read only the right inputs, produced files for the next stage, and left an audit trail I could review before moving forward. The only manual touchpoint was a short Power BI Desktop finish to refresh, apply the theme, bind slicers, and export.</p>
+
+    <!-- AGENT 1 -->
+    <div class="agent-block a1">
+      <div class="agent-header-row">
+        <div class="agent-num">Agent 1 — Strategist</div>
+      </div>
+      <div class="agent-title-row">Research the domain and pick the right KPIs</div>
+      <div class="agent-desc">Read the project brief, researched industry-standard HR attrition benchmarks, and recommended the four KPIs that matter most: overall attrition rate, overtime attrition, max-risk role, and early-tenure attrition. Flagged dataset risk columns for the profiler to watch.</div>
+      <div class="agent-io">
+        <div class="io-cell"><div class="io-label">Reads</div>project-brief.md</div>
+        <div class="io-cell"><div class="io-label">Writes</div>outputs/1-strategy/strategy-brief.md</div>
+      </div>
+    </div>
+    <div class="agent-arrow">↓</div>
+
+    <!-- AGENT 2 -->
+    <div class="agent-block a2">
+      <div class="agent-header-row">
+        <div class="agent-num">Agent 2 — Data Profiler</div>
+      </div>
+      <div class="agent-title-row">Profile the 1,470-row dataset and flag quality issues</div>
+      <div class="agent-desc">Ran column-by-column awk aggregates across all 35 columns. Caught 4 constant columns (EmployeeCount, StandardHours, Over18, EmployeeNumber) and excluded them. Confirmed zero nulls, zero duplicates, clean categorical distributions. Quality score: 9.5/10.</div>
+      <div class="agent-io">
+        <div class="io-cell"><div class="io-label">Reads</div>data.csv (via awk only, never all rows)<br>outputs/1-strategy/strategy-brief.md</div>
+        <div class="io-cell"><div class="io-label">Writes</div>outputs/2-profile/data-profile.md<br>outputs/2-profile/quality-report.md<br>outputs/2-profile/kpi-values.json</div>
+      </div>
+    </div>
+    <div class="agent-arrow">↓</div>
+
+    <!-- AGENT 3 -->
+    <div class="agent-block a3">
+      <div class="agent-header-row">
+        <div class="agent-num">Agent 3 — Designer</div>
+      </div>
+      <div class="agent-title-row">Identify the 3 most surprising insights, then design the layout</div>
+      <div class="agent-desc">Surfaced the three headline insights (OT as 2.9× risk multiplier, Sales Rep as the hottest seat, front-loaded attrition in years 0-2). Designed the full bento layout, picked the coral + lilac palette, wrote chart specs with exact hex codes, and built a CSS/SVG design preview to approve before any chart JSON was written.</div>
+      <div class="agent-io">
+        <div class="io-cell"><div class="io-label">Reads</div>outputs/1-strategy/strategy-brief.md<br>outputs/2-profile/data-profile.md<br>outputs/2-profile/kpi-values.json</div>
+        <div class="io-cell"><div class="io-label">Writes</div>outputs/3-design/design-spec.md<br>outputs/3-design/background.png<br>outputs/3-design/design-preview.html</div>
+      </div>
+    </div>
+    <div class="agent-arrow">↓</div>
+
+    <!-- AGENT 4 -->
+    <div class="agent-block a4">
+      <div class="agent-header-row">
+        <div class="agent-num">Agent 4 — Builder</div>
+      </div>
+      <div class="agent-title-row">Turn the design spec into Power BI chart JSONs + theme</div>
+      <div class="agent-desc">Wrote four Vega-Lite chart specs (overtime comparison, department bar, top-5 roles, tenure area), a Power BI theme.json with the Segoe UI font stack and card tints, eight DAX measures, and a calculated Tenure Band column. Produced a near-complete PBIP project with a short manual finish.</div>
+      <div class="agent-io">
+        <div class="io-cell"><div class="io-label">Reads</div>outputs/3-design/design-spec.md<br>templates/deneb-*.json (per chart type)</div>
+        <div class="io-cell"><div class="io-label">Writes</div>outputs/4-build/charts/chart-*.json<br>outputs/4-build/theme.json<br>outputs/4-build/pbip/ (full Power BI project)</div>
+      </div>
+    </div>
+    <div class="agent-arrow">↓</div>
+
+    <!-- MANUAL STEP -->
+    <div class="manual-block">
+      <div class="agent-num">Manual step — about 3 minutes in Power BI Desktop</div>
+      <div class="agent-title-row" style="font-size:15px;margin-top:4px;">Final assembly</div>
+      <div class="agent-desc">Opened the PBIP in Power BI Desktop. Clicked Refresh. Applied theme.json via View → Themes. Dragged four source columns onto the four slicer Field wells (classic Power BI slicers don't bind from JSON in this Desktop version). Exported the final dashboard as PDF.</div>
+    </div>
+    <div class="agent-arrow">↓</div>
+
+    <!-- AGENT 5 -->
+    <div class="agent-block a5">
+      <div class="agent-header-row">
+        <div class="agent-num">Agent 5 — QA Verifier</div>
+      </div>
+      <div class="agent-title-row">Independently re-calculate every number on the dashboard</div>
+      <div class="agent-desc">Ran independent aggregates against raw data.csv for every KPI and chart value. All four headline KPIs matched the source to one decimal place (16.1% / 30.5% / 39.8% / 29.8%). Final QA score: 8.5/10 APPROVED, with minor cosmetic notes documented separately.</div>
+      <div class="agent-io">
+        <div class="io-cell"><div class="io-label">Reads</div>data.csv (awk re-aggregation)<br>outputs/5-qa/screenshots/dashboard-final.pdf</div>
+        <div class="io-cell"><div class="io-label">Writes</div>outputs/5-qa/qa-report.md<br>outputs/5-qa/project-summary.md</div>
+      </div>
+    </div>
+    <div class="agent-arrow">↓</div>
+
+    <!-- AGENT 6 -->
+    <div class="agent-block a6">
+      <div class="agent-header-row">
+        <div class="agent-num">Agent 6 — Publisher</div>
+      </div>
+      <div class="agent-title-row">Build the portfolio page, README, and interview-prep guide</div>
+      <div class="agent-desc">Consumed the compact project-summary.md from Agent 5 and produced the public portfolio case study, a GitHub README, and a private interview-prep guide with a 30-second pitch, interview Q&amp;A, and the numbers to remember.</div>
+      <div class="agent-io">
+        <div class="io-cell"><div class="io-label">Reads</div>outputs/5-qa/project-summary.md<br>templates/portfolio-page-template.html</div>
+        <div class="io-cell"><div class="io-label">Writes</div>outputs/6-publish/portfolio-page.html<br>outputs/6-publish/README.md<br>outputs/6-publish/private-interview-prep.html</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tools-section">
+    <div class="section-title">Tools &amp; Technologies</div>
+    <div class="section-subtitle">Stack used for this project</div>
+    <div class="tools-grid">
+      <span class="tool-tag">Power BI Desktop</span>
+      <span class="tool-tag">Vega-Lite / Deneb</span>
+      <span class="tool-tag">Claude Code</span>
+      <span class="tool-tag">IBM HR Analytics (Kaggle CC0)</span>
+      <span class="tool-tag">GitHub Pages</span>
+    </div>
+  </section>
+
+  <footer>
+    Built by <a href="https://linkedin.com/in/rayyanjunaid">Rayyan Junaid</a> · <a href="https://github.com/RJportfolio764/hr-attrition-dashboard">GitHub</a> · April 2026
+  </footer>
+
+</body>
+</html>
